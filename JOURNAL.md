@@ -65,3 +65,18 @@
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:28
 - **Prompt**: can you set up testing for this app,using basic pytest features and create 5 tests?
+### **New Interaction**
+- **Agent Version**: 2.2
+- **Date**: 24-03-2026 14:05
+- **User**: $USER
+- **Prompt**: can you set up testing for this app,using basic pytest features and create 5 tests?
+- **CoPilot Mode**: Edit
+- **CoPilot Model**: GPT-5 mini
+- **Socratic Mode**: ON
+- **Changes Made**: Added `tests/test_bubble_sort.py` with five pytest tests covering empty list, single element, already sorted, reverse sorted, and duplicates.
+- **Context and Reasons for Changes**: User requested basic pytest tests to validate `bubble_sort()` behavior; added tests to `tests/` so they can be run with `pytest`.
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 24-03-2026 14:32
+- **Prompt**: can you create README.md for this project?
