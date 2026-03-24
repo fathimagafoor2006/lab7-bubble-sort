@@ -25,3 +25,8 @@
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 13:49
 - **Prompt**: can you explain to me how bubble sort works?
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 24-03-2026 13:50
+- **Prompt**: help me learn how to write a bubble sort application in python?
