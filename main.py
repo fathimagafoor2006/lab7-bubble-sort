@@ -68,7 +68,7 @@ def draw_bars(arr: List[int], width: int | None = None) -> str:
     span = max_val - min_val if max_val != min_val else 1
 
     # Reserve some columns for spacing and ensure at least one char per bar
-    bar_width = max(1, (width - (len(arr) - 1)) // len(arr))
+    bar_width = max(1, width // (len(arr) * 2))
 
     bars = []
     for val in arr:
@@ -114,6 +114,111 @@ def bubble_sort_visual(arr: List[int], delay: float = 0.06) -> None:
     sys.stdout.write("\n")
 
 
+def bubble_sort_pygame(arr: List[int], delay: float = 0.06) -> None:
+    """Pygame-based 2D visualization of bubble sort.
+
+    Controls:
+    - Space: pause/resume
+    - Right arrow: step one swap when paused
+    - Esc or close window: exit
+
+    This function imports `pygame` locally so the project can run without
+    pygame installed unless this mode is used.
+    """
+    try:
+        import pygame
+    except Exception as e:
+        print("Pygame is required for this visualization. Install with: pip install pygame")
+        return
+
+    pygame.init()
+    width, height = 800, 400
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption("Bubble Sort Visualization")
+    clock = pygame.time.Clock()
+
+    n = len(arr)
+    if n == 0:
+        return
+
+    def draw(highlight: tuple | None = None):
+        screen.fill((30, 30, 30))
+        maxv = max(arr)
+        bar_w = max(1, width // n)
+        for i, v in enumerate(arr):
+            h = int((v / maxv) * (height - 40))
+            x = i * bar_w
+            y = height - h
+            color = (200, 200, 200)
+            if highlight and i in highlight:
+                color = (220, 80, 80)
+            pygame.draw.rect(screen, color, (x, y, bar_w - 1, h))
+        pygame.display.flip()
+
+    running = True
+    paused = False
+    step = False
+
+    draw()
+
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - 1 - i):
+            # Event handling
+            for ev in pygame.event.get():
+                if ev.type == pygame.QUIT:
+                    running = False
+                elif ev.type == pygame.KEYDOWN:
+                    if ev.key == pygame.K_SPACE:
+                        paused = not paused
+                    elif ev.key == pygame.K_RIGHT:
+                        step = True
+                    elif ev.key == pygame.K_ESCAPE:
+                        running = False
+            if not running:
+                break
+
+            while paused and not step and running:
+                for ev in pygame.event.get():
+                    if ev.type == pygame.QUIT:
+                        running = False
+                    elif ev.type == pygame.KEYDOWN:
+                        if ev.key == pygame.K_SPACE:
+                            paused = False
+                        elif ev.key == pygame.K_RIGHT:
+                            step = True
+                        elif ev.key == pygame.K_ESCAPE:
+                            running = False
+                clock.tick(30)
+
+            if not running:
+                break
+
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+                draw(highlight=(j, j + 1))
+                # delay in milliseconds
+                pygame.time.delay(max(1, int(delay * 1000)))
+
+            clock.tick(60)
+
+        if not running or not swapped:
+            break
+
+    # final draw and wait for user to close or press Esc
+    draw()
+    while running:
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                running = False
+            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:
+                running = False
+        clock.tick(30)
+
+    pygame.quit()
+
+
 def parse_args() -> dict:
     """Parse command-line arguments or return defaults."""
     parser = argparse.ArgumentParser(description="Bubble Sort Application")
@@ -132,6 +237,13 @@ def parse_args() -> dict:
         "--visual",
         action="store_true",
         help="Enable in-place ASCII visual animation (in-terminal)",
+    )
+    group.add_argument(
+        "--py",
+        "--pygame",
+        action="store_true",
+        dest="py",
+        help="Enable Pygame-based 2D visualization (requires pygame)",
     )
     parser.add_argument(
         "--delay",
@@ -161,13 +273,14 @@ def parse_args() -> dict:
             parser.error("Invalid number in --arr input. Provide comma-separated integers.")
 
     return {
-        "arr": arr,
-        "trace": args.trace,
-        "example": args.example,
-        "visual": args.visual,
-        "delay": args.delay,
-        "max_elements": args.max_elements,
-    }
+    "arr": arr,
+    "trace": args.trace,
+    "example": args.example,
+    "visual": args.visual,
+    "py": args.py,
+    "delay": args.delay,
+    "max_elements": args.max_elements,
+}
 
 
 def main() -> None:
@@ -193,6 +306,14 @@ def main() -> None:
             print("Run without --visual or provide a smaller list or increase --max-elements.")
         else:
             bubble_sort_visual(arr, delay=args.get("delay", 0.06))
+    elif args.get("py"):
+        # Pygame visualization mode
+        max_visual = args.get("max_elements", 200)
+        if len(arr) > max_visual:
+            print(f"List too large for pygame visual mode (>{max_visual} elements).")
+            print("Run without --py or provide a smaller list or increase --max-elements.")
+        else:
+            bubble_sort_pygame(arr, delay=args.get("delay", 0.06))
     else:
         bubble_sort(arr)
 
