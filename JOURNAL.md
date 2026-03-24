@@ -77,6 +77,17 @@
 - **Context and Reasons for Changes**: User requested basic pytest tests to validate `bubble_sort()` behavior; added tests to `tests/` so they can be run with `pytest`.
 
 ### **New Interaction**
+- **Agent Version**: 2.2
+- **Date**: 24-03-2026 14:18
+- **User**: $USER
+- **Prompt**: can you create README.md for this project?
+- **CoPilot Mode**: Edit
+- **CoPilot Model**: GPT-5 mini
+- **Socratic Mode**: ON
+- **Changes Made**: Added `README.md` with project description, usage examples, test instructions, and development notes.
+- **Context and Reasons for Changes**: The user requested a README to document how to run the app and tests; created `README.md` at project root.
+
+### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
