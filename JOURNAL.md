@@ -154,6 +154,17 @@
 - **Context and Reasons for Changes**: User asked to enable CI; added a simple workflow that runs tests automatically on push/PR to `main`/`master`.
 
 ### **New Interaction**
+- **Agent Version**: 2.2
+- **Date**: 24-03-2026 15:44
+- **User**: $USER
+- **Prompt**: yes
+- **CoPilot Mode**: Edit
+- **CoPilot Model**: GPT-5 mini
+- **Socratic Mode**: OFF
+- **Changes Made**: Added a CI badge placeholder to `README.md`. The badge references the workflow `python-tests.yml`; replace `<owner>/<repo>` in the badge URL with your GitHub repository path to enable it.
+- **Context and Reasons for Changes**: User requested adding a badge to the README; added a placeholder badge and instructions to replace the repository owner/name.
+
+### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
@@ -211,4 +222,9 @@
 ### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 17:36
+- **Prompt**: yes
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 24-03-2026 17:42
 - **Prompt**: yes
