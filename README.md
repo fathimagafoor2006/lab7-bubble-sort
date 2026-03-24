@@ -1,4 +1,5 @@
 # Bubble Sort Learning App
+[![Tests](https://github.com/fathimagafoor2006/lab7-bubble-sort/actions/workflows/python-tests.yml/badge.svg)](https://github.com/fathimagafoor2006/lab7-bubble-sort/actions)
 
 A small, educational Python project demonstrating bubble sort with a
 trace mode and simple CLI. The repository includes a skeleton implementation

@@ -165,6 +165,17 @@
 - **Context and Reasons for Changes**: User requested adding a badge to the README; added a placeholder badge and instructions to replace the repository owner/name.
 
 ### **New Interaction**
+- **Agent Version**: 2.2
+- **Date**: 24-03-2026 15:49
+- **User**: $USER
+- **Prompt**: yes
+- **CoPilot Mode**: Edit
+- **CoPilot Model**: GPT-5 mini
+- **Socratic Mode**: OFF
+- **Changes Made**: Replaced the README CI badge placeholder with the detected repository path `fathimagafoor2006/lab7-bubble-sort` from the git remote and updated the badge URL accordingly.
+- **Context and Reasons for Changes**: The user approved auto-filling the badge; the repo remote URL was read and the README updated to show the correct CI badge link.
+
+### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
