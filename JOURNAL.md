@@ -91,3 +91,8 @@
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 24-03-2026 14:38
+- **Prompt**: i would like to visualize the sorting as it is happening.first, i would like to explore a terminal based approach.what do you suggest?

@@ -32,3 +32,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
 
+### 24-03-2026 14:38
+- **Prompt**: i would like to visualize the sorting as it is happening.first, i would like to explore a terminal based approach.what do you suggest?
+
