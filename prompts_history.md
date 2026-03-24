@@ -14,3 +14,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 24-03-2026 13:50
 - **Prompt**: help me learn how to write a bubble sort application in python?
 
+### 24-03-2026 13:54
+- **Prompt**: Can you help me learn by writing a skelton bubble sort app with stubs functions,with comments and TODOs that will indicate what i need to do?
+
