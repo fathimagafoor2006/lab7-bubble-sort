@@ -11,75 +11,90 @@ How to use:
 """
 
 from typing import List
+import argparse
 
 
 def bubble_sort(arr: List[int]) -> None:
-	"""In-place bubble sort that sorts `arr` in ascending order.
-
-	TODOs:
-	- Implement the standard bubble sort algorithm with an early-exit
-	  optimization (stop when a pass makes no swaps).
-	- Keep it stable (don't reorder equal elements).
-	- Add type checks or assertions if desired.
-
-	Args:
-		arr: list of integers to sort (modified in place).
-	"""
-	# TODO: implement the sorting logic below
-	pass
+    """In-place bubble sort that sorts `arr` in ascending order."""
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        if not swapped:
+            break
 
 
 def bubble_sort_with_trace(arr: List[int]) -> None:
-	"""Bubble sort that prints the array after every swap for learning.
-
-	TODOs:
-	- Call this from `main()` when user asks for verbose/debug mode.
-	- Use the same sorting logic as `bubble_sort` but print intermediate
-	  states so the learner can follow swaps and passes.
-	"""
-	# TODO: implement the tracing variant (use prints or logging)
-	pass
+    """Bubble sort that prints the array after every swap for learning."""
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        print(f"Pass {i + 1} start: {arr}")
+        for j in range(0, n - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+                print(f"  Swapped positions {j} and {j+1}: {arr}")
+        if not swapped:
+            print("  No swaps — list is sorted early.")
+            break
+        print(f"Pass {i + 1} end: {arr}\n")
 
 
 def parse_args() -> dict:
-	"""Parse command-line arguments or return defaults.
+    """Parse command-line arguments or return defaults."""
+    parser = argparse.ArgumentParser(description="Bubble Sort Application")
+    parser.add_argument(
+        "--arr",
+        type=str,
+        help="Comma-separated list of numbers, e.g. 5,2,9,1,5",
+    )
+    parser.add_argument(
+        "--trace",
+        action="store_true",
+        help="Enable verbose tracing mode",
+    )
+    parser.add_argument(
+        "--example",
+        action="store_true",
+        help="Run a built-in example list",
+    )
 
-	TODOs:
-	- Use `argparse` to support: input list (as comma-separated numbers),
-	  `--trace` to enable `bubble_sort_with_trace`, and `--example` to run
-	  a built-in example.
-	- Return a simple dict with keys like `arr`, `trace`, `example`.
-	"""
-	# TODO: implement argument parsing and return a dict
-	return {"arr": None, "trace": False, "example": False}
+    args = parser.parse_args()
+
+    arr = None
+    if args.arr:
+        try:
+            arr = [int(x.strip()) for x in args.arr.split(",")]
+        except ValueError:
+            raise ValueError("Invalid number in --arr input.")
+
+    return {"arr": arr, "trace": args.trace, "example": args.example}
 
 
 def main() -> None:
-	"""Main entrypoint for the bubble sort app.
+    """Main entrypoint for the bubble sort app."""
+    args = parse_args()
+    arr = args.get("arr")
 
-	Suggested flow (implement these TODOs):
-	1. Call `parse_args()` to get inputs.
-	2. If `example` was requested, set `arr` to a demo list.
-	3. If `trace` is True, call `bubble_sort_with_trace(arr)`; else call
-	   `bubble_sort(arr)`.
-	4. Print the sorted result.
-	5. Add error handling for invalid input.
-	"""
-	# TODO: implement the main flow using functions above
-	args = parse_args()
-	arr = args.get("arr")
-	if arr is None:
-		# TODO: replace with real input handling or example data
-		arr = [5, 2, 9, 1, 5]
+    if args.get("example"):
+        arr = [5, 2, 9, 1, 5]
 
-	if args.get("trace"):
-		bubble_sort_with_trace(arr)
-	else:
-		bubble_sort(arr)
+    if arr is None:
+        arr = [5, 2, 9, 1, 5]  # fallback default
 
-	print("Sorted result:", arr)
+    print("Original:", arr)
+
+    if args.get("trace"):
+        bubble_sort_with_trace(arr)
+    else:
+        bubble_sort(arr)
+
+    print("Sorted result:", arr)
 
 
 if __name__ == "__main__":
-	main()
-
+    main()
