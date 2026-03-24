@@ -121,6 +121,17 @@
 - **Context and Reasons for Changes**: User requested Socratic mode off and completion of the in-terminal visualization; implemented full visual feature and CLI controls.
 
 ### **New Interaction**
+- **Agent Version**: 2.2
+- **Date**: 24-03-2026 15:20
+- **User**: $USER
+- **Prompt**: Can you implement a pygame based visualization?
+- **CoPilot Mode**: Edit
+- **CoPilot Model**: GPT-5 mini
+- **Socratic Mode**: OFF
+- **Changes Made**: Added `bubble_sort_pygame()` to `main.py`, wired a new mutually-exclusive CLI flag `--py/--pygame` to enable Pygame visualization, and documented controls. The pygame renderer draws bars, highlights swaps, supports pause/step/quit, and respects `--delay` and `--max-elements` limits.
+- **Context and Reasons for Changes**: User requested a 2D graphics rendering option; implemented a pygame-based renderer that runs as a standalone visualization when requested.
+
+### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
@@ -164,3 +175,8 @@
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 16:09
 - **Prompt**: Can you implement a pygame based visualization?
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 24-03-2026 16:12
+- **Prompt**: can you install pygame in the loca virtual environment and then create a requirements.txt that incluedes the required libraraies to run this project,and finally update README to explain all of this?
