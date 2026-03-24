@@ -143,6 +143,17 @@
 - **Context and Reasons for Changes**: User requested local installation of pygame and project dependency documentation; performed installation and updated project files accordingly.
 
 ### **New Interaction**
+- **Agent Version**: 2.2
+- **Date**: 24-03-2026 15:39
+- **User**: $USER
+- **Prompt**: yes
+- **CoPilot Mode**: Edit
+- **CoPilot Model**: GPT-5 mini
+- **Socratic Mode**: OFF
+- **Changes Made**: Added GitHub Actions workflow `.github/workflows/python-tests.yml` to run the test suite on push and pull requests. The workflow sets up Python 3.11, installs dependencies from `requirements.txt` if present, and runs `pytest`.
+- **Context and Reasons for Changes**: User asked to enable CI; added a simple workflow that runs tests automatically on push/PR to `main`/`master`.
+
+### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 14:32
 - **Prompt**: can you create README.md for this project?
@@ -195,4 +206,9 @@
 ### **New Interaction**
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 17:35
+- **Prompt**: yes
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 24-03-2026 17:36
 - **Prompt**: yes
