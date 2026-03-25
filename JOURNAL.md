@@ -239,3 +239,8 @@
 - **Hook Version**: 1.02
 - **Date**: 24-03-2026 17:42
 - **Prompt**: yes
+
+### **New Interaction**
+- **Hook Version**: 1.02
+- **Date**: 26-03-2026 00:48
+- **Prompt**: update my README  based on the latest versin of my project, do not rewrite the whole file,do not addd extra sections or fancy formatting,only update it to reflect the actual features in main.py. normalbubble sort,trace mod",ASCII visual mode,pygame visualization,example mode,delay and max elements arguments,pytest tests ,,keep the structure of my current README .just update the content so it is accurate
