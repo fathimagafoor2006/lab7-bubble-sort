@@ -24,14 +24,20 @@ except Exception:
     colorama = None
 
 
+def bubble_sort_step(arr, j):
+    if arr[j] > arr[j + 1]:
+        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+        return True
+    return False
+
+
 def bubble_sort(arr: List[int]) -> None:
     """In-place bubble sort that sorts `arr` in ascending order."""
     n = len(arr)
     for i in range(n):
         swapped = False
         for j in range(0, n - 1 - i):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            if bubble_sort_step(arr, j):
                 swapped = True
         if not swapped:
             break
@@ -44,8 +50,7 @@ def bubble_sort_with_trace(arr: List[int]) -> None:
         swapped = False
         print(f"Pass {i + 1} start: {arr}")
         for j in range(0, n - 1 - i):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            if bubble_sort_step(arr, j):
                 swapped = True
                 print(f"  Swapped positions {j} and {j+1}: {arr}")
         if not swapped:
@@ -54,7 +59,7 @@ def bubble_sort_with_trace(arr: List[int]) -> None:
         print(f"Pass {i + 1} end: {arr}\n")
 
 
-def draw_bars(arr: List[int], width: int | None = None) -> str:
+def draw_bars(arr: List[int], width: int | None = None, highlight=None) -> str:
     """Return a single-line ASCII/bar representation of `arr` for animation."""
     if not arr:
         return ""
@@ -71,7 +76,7 @@ def draw_bars(arr: List[int], width: int | None = None) -> str:
     bar_width = max(1, width // (len(arr) * 2))
 
     bars = []
-    for val in arr:
+    for idx, val in enumerate(arr):
         norm = (val - min_val) / span
         bar_len = int(norm * (bar_width - 1)) + 1
         # Fallback ASCII character if terminal doesn't show block
@@ -80,7 +85,12 @@ def draw_bars(arr: List[int], width: int | None = None) -> str:
             ch.encode(sys.stdout.encoding or "utf-8")
         except Exception:
             ch = "#"
-        bars.append(ch * bar_len)
+        bar = ch * bar_len
+
+        if highlight and idx in highlight:
+            bar = f"\x1b[91m{bar}\x1b[0m"
+
+        bars.append(bar)
 
     return " ".join(bars)
 
@@ -98,13 +108,12 @@ def bubble_sort_visual(arr: List[int], delay: float = 0.06) -> None:
     for i in range(n):
         swapped = False
         for j in range(0, n - 1 - i):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            if bubble_sort_step(arr, j):
                 swapped = True
 
                 # Redraw
                 sys.stdout.write("\x1b[2K\r")
-                sys.stdout.write(draw_bars(arr))
+                sys.stdout.write(draw_bars(arr, highlight=(j, j + 1)))
                 sys.stdout.flush()
                 time.sleep(delay)
 
@@ -194,11 +203,9 @@ def bubble_sort_pygame(arr: List[int], delay: float = 0.06) -> None:
             if not running:
                 break
 
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            if bubble_sort_step(arr, j):
                 swapped = True
                 draw(highlight=(j, j + 1))
-                # delay in milliseconds
                 pygame.time.delay(max(1, int(delay * 1000)))
 
             clock.tick(60)
@@ -273,14 +280,14 @@ def parse_args() -> dict:
             parser.error("Invalid number in --arr input. Provide comma-separated integers.")
 
     return {
-    "arr": arr,
-    "trace": args.trace,
-    "example": args.example,
-    "visual": args.visual,
-    "py": args.py,
-    "delay": args.delay,
-    "max_elements": args.max_elements,
-}
+        "arr": arr,
+        "trace": args.trace,
+        "example": args.example,
+        "visual": args.visual,
+        "py": args.py,
+        "delay": args.delay,
+        "max_elements": args.max_elements,
+    }
 
 
 def main() -> None:
